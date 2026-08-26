@@ -1,0 +1,29 @@
+{
+  "plugins": {
+    "conform.nvim": [],
+    "grug-far.nvim": [],
+    "guess-indent.nvim": [],
+    "mini.ai": [],
+    "mini.bufremove": [],
+    "mini.clue": [],
+    "mini.extra": [],
+    "mini.icons": [],
+    "mini.pairs": [],
+    "mini.pick": [],
+    "mini.statusline": [],
+    "mini.surround": [],
+    "nvim-lspconfig": [],
+    "nvim-treesitter": [],
+    "obsidian.nvim": {
+      "rev": "6b2a22a",
+      "src": "https://github.com/obsidian-nvim/obsidian.nvim"
+    },
+    "otter.nvim": {
+      "rev": "fc0aa35",
+      "src": "https://github.com/jmbuhr/otter.nvim"
+    },
+    "plenary.nvim": [],
+    "vague.nvim": [],
+    "yazi.nvim": []
+  }
+}
