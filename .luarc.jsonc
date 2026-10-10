@@ -3,6 +3,9 @@
   "runtime": {
     "version": "LuaJIT"
   },
+  "diagnostics": {
+    "globals": ["NvOpts"]
+  },
   "workspace": {
     "checkThirdParty": false,
     "library": [
