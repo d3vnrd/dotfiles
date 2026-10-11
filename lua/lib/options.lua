@@ -1,10 +1,9 @@
 local o = vim.o
 local g = vim.g
 
--- 'vim.opt' is very similar to `vim.o` but offers an interface for conveniently
--- interacting with tables.
---  See `:help lua-options`
---  and `:help lua-guide-options`
+-- 'vim.opt' is very similar to `vim.o` but offers an interface for
+-- conveniently interacting with tables.
+--  See `:help lua-options` and `:help lua-guide-options`
 local opt = vim.opt
 
 -- Set <space> as the leader key
@@ -51,8 +50,8 @@ o.inccommand = 'split'
 
 -- Setting tabstop and indentation
 o.tabstop = 4
-o.shiftwidth = 0 -- 0 means "use tabstop"
-o.softtabstop = -1 -- -1 means "use shiftwidth"
+o.shiftwidth = 0 -- 0 means "= tabstop"
+o.softtabstop = -1 -- -1 means "= shiftwidth"
 o.expandtab = true
 o.breakindent = true
 
@@ -91,30 +90,66 @@ o.timeoutlen = 300
 -- See `:help 'confirm'`
 o.confirm = true
 
--- Disable some builtin providers by neovim by default
-for _, plugin in pairs {
-    'netrw',
-    'netrwPlugin',
-    'netrwSettings',
-    'netrwFileHandlers',
-    'gzip',
-    'zip',
-    'zipPlugin',
-    'tar',
-    'tarPlugin',
-    'getscript',
-    'getscriptPlugin',
-    'vimball',
-    'vimballPlugin',
-    '2html_plugin',
-    'logipat',
-    'rrhelper',
-    'spellfile_plugin',
-    'matchit',
+-- Disable some builtin providers by neovim
+for _, provider in ipairs {
     'python3_provider',
     'ruby_provider',
     'perl_provider',
     'node_provider',
 } do
-    g['loaded_' .. plugin] = 1
+    g['loaded_' .. provider] = 0
 end
+
+for _, provider in ipairs {
+    'netrw',
+    'netrwPlugin',
+    'netrwSettings',
+    'netrwFileHandlers',
+    'spellfile_plugin', -- auto download missing spell files
+} do
+    g['loaded_' .. provider] = 1
+end
+
+-- Identify big file and set custom `bigfile` type
+vim.filetype.add {
+    pattern = {
+        ['.*'] = {
+            function(path, buf)
+                if not path or not buf or vim.bo[buf].buftype ~= '' or vim.bo[buf].filetype == 'bigfile' then
+                    return nil
+                end
+
+                local big_size = 500 * 1024 -- 500kb
+                local stat = vim.uv.fs_stat(path)
+
+                if stat and stat.size > big_size then
+                    return 'bigfile'
+                end
+            end,
+        },
+    },
+}
+
+-- Recommended diagnostic configs
+--  See `:help vim.diagnostic.Opts`
+vim.diagnostic.config {
+    update_in_insert = false,
+    severity_sort = true,
+    float = { border = 'rounded', source = 'if_many' },
+    underline = { severity = { min = vim.diagnostic.severity.WARN } },
+
+    -- can switch between these as you prefer
+    virtual_text = true, -- text shows up at the end of the line
+    virtual_lines = false, -- text shows up underneath the line, with virtual lines
+
+    -- auto open the float, to easily read the errors when jumping with <[d> and <]d>
+    jump = {
+        on_jump = function(_, bufnr)
+            vim.diagnostic.open_float {
+                bufnr = bufnr,
+                scope = 'cursor',
+                focus = false,
+            }
+        end,
+    },
+}
