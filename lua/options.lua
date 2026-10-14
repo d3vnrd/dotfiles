@@ -1,5 +1,7 @@
-local o = vim.o
 local g = vim.g
+
+--  See `:help vim.o` and `:help option-list`
+local o = vim.o
 
 -- 'vim.opt' is very similar to `vim.o` but offers an interface for
 -- conveniently interacting with tables.
@@ -11,13 +13,6 @@ local opt = vim.opt
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
 g.mapleader = ' '
 g.maplocalleader = ' '
-
--- Set to true if a Nerd Font is installed and selected in the terminal
-g.have_nerd_font = NvOpts.have_nerd_font
-
---- Setting options ---
---  See `:help vim.o`
---  For more options, see `:help option-list`
 
 -- Make line relative number default
 o.number = true
@@ -110,9 +105,10 @@ for _, provider in ipairs {
     g['loaded_' .. provider] = 1
 end
 
--- Identify big file and set custom `bigfile` type
+-- Custom filetypes for special behaviors
 vim.filetype.add {
     pattern = {
+        -- Identify big file and set custom `bigfile` type
         ['.*'] = {
             function(path, buf)
                 if not path or not buf or vim.bo[buf].buftype ~= '' or vim.bo[buf].filetype == 'bigfile' then
@@ -127,29 +123,5 @@ vim.filetype.add {
                 end
             end,
         },
-    },
-}
-
--- Recommended diagnostic configs
---  See `:help vim.diagnostic.Opts`
-vim.diagnostic.config {
-    update_in_insert = false,
-    severity_sort = true,
-    float = { border = 'rounded', source = 'if_many' },
-    underline = { severity = { min = vim.diagnostic.severity.WARN } },
-
-    -- can switch between these as you prefer
-    virtual_text = true, -- text shows up at the end of the line
-    virtual_lines = false, -- text shows up underneath the line, with virtual lines
-
-    -- auto open the float, to easily read the errors when jumping with <[d> and <]d>
-    jump = {
-        on_jump = function(_, bufnr)
-            vim.diagnostic.open_float {
-                bufnr = bufnr,
-                scope = 'cursor',
-                focus = false,
-            }
-        end,
     },
 }

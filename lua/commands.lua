@@ -1,13 +1,8 @@
--- `:help lua-guide-autocommands`
--- NOTE: Ordered alphabetically by group name.
+-- Automatic Commands
+--  `:help lua-guide-autocommands`
+--  NOTE: Ordered alphabetically by group name.
 local auto = vim.api.nvim_create_autocmd
-
----@param desc string
-local augroup = function(desc)
-    return vim.api.nvim_create_augroup('user/' .. desc, { clear = true })
-end
-
-local M = {}
+local augroup = Lib.augroup
 
 auto('FileType', {
     group = augroup 'big_file',
@@ -40,8 +35,26 @@ auto('FileType', {
     end,
 })
 
+auto('UIEnter', {
+    group = augroup 'set-colorscheme',
+    desc = 'Apply choosen color-scheme once startup has finished',
+    once = true,
+    nested = true, -- Set colorscheme trigger 'ColorScheme' event which require nested option to work
+    callback = function()
+        local name = vim.g.colorscheme
+        if not name then
+            return
+        end
+
+        local ok, err = pcall(vim.cmd.colorscheme, name)
+        if not ok then
+            vim.notify(err, vim.log.levels.WARN)
+        end
+    end,
+})
+
 auto('BufHidden', {
-    group = augroup 'delete_no_name',
+    group = augroup 'delete-noname',
     desc = 'Delete [No Name] buffers',
     callback = function(args)
         if args.file == '' and vim.bo[args.buf].buftype == '' and not vim.bo[args.buf].modified then
@@ -80,4 +93,24 @@ auto('BufReadPost', {
     end,
 })
 
-return M
+-- User Commands
+--  `:help lua-guide-commands`
+local user = vim.api.nvim_create_user_command
+
+user('PackClean', function()
+    local names = {}
+    for _, p in ipairs(vim.pack.get()) do
+        if not p.active then
+            table.insert(names, p.spec.name)
+        end
+    end
+
+    if #names == 0 then
+        return
+    end
+
+    local msg = 'Delete unused plugins?\n' .. table.concat(names, '\n')
+    if vim.fn.confirm(msg, '&Yes\n&No', 2) == 1 then
+        vim.pack.del(names)
+    end
+end, {})
