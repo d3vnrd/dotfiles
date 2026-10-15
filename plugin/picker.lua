@@ -3,11 +3,13 @@ Lib.packadd {
     callback = function(pick)
         pick.setup {
             window = {
-                config = {
-                    width = vim.api.nvim_win_get_width(0),
-                    height = 10,
-                    border = { '', '─', '', '', '', '', '', '' },
-                },
+                config = function()
+                    return {
+                        height = 10,
+                        width = vim.api.nvim_win_get_width(0),
+                        border = { '', '─', '', '', '', '', '', '' },
+                    }
+                end,
             },
         }
 
@@ -15,6 +17,12 @@ Lib.packadd {
         Lib.bind('<leader>ff', pick.builtin.files, 'Find files')
         Lib.bind('<leader>fg', pick.builtin.grep_live, 'Live grep for words')
         Lib.bind('<leader>fh', pick.builtin.help, 'Find help pages')
+        Lib.bind('<leader><leader>', function()
+            local ok, _ = pcall(pick.builtin.resume)
+            if not ok then
+                return
+            end
+        end, 'Resume previous picker')
     end,
 }
 
@@ -26,7 +34,6 @@ Lib.packadd {
 
         Lib.bind('<leader>fc', extra.pickers.commands, 'Find available commands')
         Lib.bind('<leader>fe', extra.pickers.explorer, 'Explore current directory and open file')
-        Lib.bind('<leader>fk', extra.pickers.keymaps, 'Find help pages')
-        Lib.bind('<leader><leader>', extra.pickers.resume, 'Resume previous picker')
+        Lib.bind('<leader>fk', extra.pickers.keymaps, 'Find available keymaps')
     end,
 }

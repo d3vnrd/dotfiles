@@ -1,5 +1,6 @@
 Lib.packadd {
     src = 'https://github.com/stevearc/conform.nvim',
+    name = 'conform',
     event = 'BufWritePre',
     callback = function(plugin)
         plugin.setup {
@@ -38,11 +39,10 @@ Lib.packadd {
                 yaml = { 'dprint' },
                 typst = { 'typstyle' },
                 sh = { 'shfmt' },
+                -- For filetypes without a formatter:
+                ['_'] = { 'trim_whitespace', 'trim_newlines' },
             },
         }
-
-        -- Use conform for <gq>
-        vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 
         -- Start auto-formatting by default (disable with user ToggleFormat command)
         vim.g.autoformat = true

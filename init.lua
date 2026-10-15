@@ -2,7 +2,7 @@ vim.loader.enable()
 
 vim.g.have_nerd_font = true
 vim.g.nerd_font_variant = 'normal'
-vim.g.colorscheme = 'default'
+vim.g.colorscheme = 'vague'
 
 _G.Lib = require 'lib'
 

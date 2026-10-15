@@ -8,15 +8,6 @@ Lib.packadd {
 }
 
 Lib.packadd {
-    -- Beautify status-column (left-hand number column)
-    src = 'https://github.com/nvim-mini/mini.statuscolumn',
-    event = 'UIEnter',
-    callback = function(statuscolumn)
-        statuscolumn.setup()
-    end,
-}
-
-Lib.packadd {
     src = 'https://github.com/nvim-mini/mini.icons',
     event = 'UIEnter',
     callback = function(icons)
@@ -25,3 +16,5 @@ Lib.packadd {
         end
     end,
 }
+
+Lib.packadd { src = 'https://github.com/vague-theme/vague.nvim', }

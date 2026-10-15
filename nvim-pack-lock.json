@@ -1,0 +1,67 @@
+{
+  "plugins": {
+    "blink.cmp": {
+      "rev": "78336bc89ee5365633bcf754d93df01678b5c08f",
+      "src": "https://github.com/saghen/blink.cmp",
+      "version": "'v1'"
+    },
+    "conform": {
+      "rev": "016802de402556da54c36bd7359b441266b01cdd",
+      "src": "https://github.com/stevearc/conform.nvim"
+    },
+    "friendly-snippets": {
+      "rev": "b4d01b0fdf3c9a549961c2f9ffe8dc09be166219",
+      "src": "https://github.com/rafamadriz/friendly-snippets"
+    },
+    "luasnip": {
+      "rev": "642b0c595e11608b4c18219e93b88d7637af27bc",
+      "src": "https://github.com/L3MON4D3/LuaSnip",
+      "version": "2.0.0 - 3.0.0"
+    },
+    "mini.ai": {
+      "rev": "d0c4987a1ead2bcf4eb22cc9815c662d76677c08",
+      "src": "https://github.com/nvim-mini/mini.ai"
+    },
+    "mini.clue": {
+      "rev": "149236aed07cf15266dbaf2736452ad6b0dced47",
+      "src": "https://github.com/nvim-mini/mini.clue"
+    },
+    "mini.extra": {
+      "rev": "7dcc3ee5ba638cca654125f40f6e3ffbc52e0dc4",
+      "src": "https://github.com/nvim-mini/mini.extra"
+    },
+    "mini.icons": {
+      "rev": "f916635dc5ae2f479fbb9ab8184bb9444b62e86c",
+      "src": "https://github.com/nvim-mini/mini.icons"
+    },
+    "mini.pairs": {
+      "rev": "03eb1f0062a2cee5314d1ac3939246e4bb21352e",
+      "src": "https://github.com/nvim-mini/mini.pairs"
+    },
+    "mini.pick": {
+      "rev": "7cb8fd34bde460986e5e39e9539a9f992ec9772e",
+      "src": "https://github.com/nvim-mini/mini.pick"
+    },
+    "mini.statusline": {
+      "rev": "d7133a9a244a8d93ccee42ff37fb9499af5956fb",
+      "src": "https://github.com/nvim-mini/mini.statusline"
+    },
+    "mini.surround": {
+      "rev": "59ce0acf79e1d930756ef3a7cb4c2369560cf548",
+      "src": "https://github.com/nvim-mini/mini.surround"
+    },
+    "nvim-treesitter": {
+      "rev": "ca581c3436fc2b236847f5b739ebc263739e5ca6",
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter",
+      "version": "'main'"
+    },
+    "typst-preview.nvim": {
+      "rev": "1c2e19486397be1c580b560fc50ee36abe329c46",
+      "src": "https://github.com/chomosuke/typst-preview.nvim"
+    },
+    "vague.nvim": {
+      "rev": "73f8aaa866bf3d14dd0b0ab9e48c11794c1cb7ab",
+      "src": "https://github.com/vague-theme/vague.nvim"
+    }
+  }
+}

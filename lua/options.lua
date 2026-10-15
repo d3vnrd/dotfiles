@@ -26,6 +26,7 @@ o.cursorline = true
 o.guicursor = ''
 
 o.colorcolumn = '80'
+o.laststatus = 3
 o.showmode = false -- don't show mode already in status line
 o.signcolumn = 'yes' -- keep signcolumn on by default
 o.showtabline = 0

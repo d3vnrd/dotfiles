@@ -35,7 +35,7 @@ auto('FileType', {
     end,
 })
 
-auto('UIEnter', {
+auto('VimEnter', {
     group = augroup 'set-colorscheme',
     desc = 'Apply choosen color-scheme once startup has finished',
     once = true,

@@ -18,8 +18,8 @@ Lib.packadd {
 
 -- Completion engine
 Lib.packadd {
-    src = 'https://github.com/Saghen/blink.cmp',
-    version = vim.version.range '1.*', -- v2 is under active development
+    src = 'https://github.com/saghen/blink.cmp',
+    version = 'v1', -- v2 is under active development
     callback = function(blink)
         blink.setup {
             appearance = { nerd_font_variant = vim.g.nerd_font_variant or 'normal' },
