@@ -1,4 +1,16 @@
 -- TODO: add support for dependencies for async installation
+--  - Lazy loading when parent plugin required
+--  - Keep a plugin name table to keep track of already loaded plugins
+--  - Defer loading plugins with `deps` field using name table as registry to
+--    check, pretty much like callstack
+--  - Build a dependency graph, by collecting all the specs first, merges them
+--    ,and then call vim.pack.add all at once with { load = false }
+--  - Separate added/active state with loaded state for garbage collector to work
+
+-- Current workaround: Nested packadd call or Order-dependent packadd call
+--  - Silent child error and run parent callback anyway
+
+-- TODO: consider auto call setup if it is a function
 
 ---@class PackSpec : vim.pack.Spec
 ---@field event? vim.api.keyset.events|vim.api.keyset.events[]
